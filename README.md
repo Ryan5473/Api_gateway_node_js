@@ -38,9 +38,3 @@ This **API Gateway** is designed to be **scalable** on-demand:
 3. **Rate Limiting**: The Gateway checks if the client has exceeded the allowed number of requests within the time window (e.g., 100 requests per 15 minutes). If exceeded, the request is rejected with a **429** status.
 4. **Routing**: If the request is valid, the Gateway forwards the request to the appropriate microservice (e.g., `inventory` microservice).
 5. **Response**: The microservice processes the request and returns the response to the API Gateway, which forwards it back to the client.
-
-## <span style="color: #2d87f0;">Installation</span>
-
-
-
-### <span style="color: #e64a19;">Steps:</span>
