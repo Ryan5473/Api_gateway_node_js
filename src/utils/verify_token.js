@@ -5,14 +5,12 @@ export default async function verifyToken(token) {
     method: 'GET',
     headers: {
       Authorization: token,
-      origin: process.env.GATEWAY_DOMAIN
-    }
-  }).then((data) => data.json())
+    },
+  }).then((res) => res.json())
 
-  if (!response.success)
-    return {
-      error: response
-    }
+  if (!response.success) {
+    return { error: response }
+  }
 
   return { user: response.data }
 }

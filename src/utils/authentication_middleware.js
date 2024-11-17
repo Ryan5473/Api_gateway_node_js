@@ -1,42 +1,18 @@
 import verifyToken from './verify_token'
 
-export default async function authenticationMiddleware(
-  req,
-  res,
-  next,
-  authConfig
-) {
-  // Check if the request contains a valid JWT token
+export default async function authenticationMiddleware(req, res, next, authConfig) {
   const token = req.headers.authorization
+
   if (!token) {
-    return res.status(401).json({
-      success: false,
-      code: 401,
-      error: {
-        type: 'UNAUTHORIZED',
-        description: 'Unauthorized: Missing authentication token'
-      }
-    })
+    return res.status(401).json({ error: 'Unauthorized: Token missing' })
   }
 
   const { user, error } = await verifyToken(token)
 
-  if (error) return res.status(401).json(error)
-
-  // Check if the user has one of the required roles
-  if (!authConfig.roles.includes(user.role)) {
-    return res.status(403).json({
-      success: false,
-      code: 403,
-      error: {
-        type: 'FORBIDDEN',
-        description: 'Forbidden: User does not have the required role'
-      }
-    })
+  if (error || !authConfig.roles.includes(user.role)) {
+    return res.status(403).json({ error: 'Forbidden: Access denied' })
   }
 
-  // Send base64 user via request headers for microservice
-  req.headers.user = Buffer.from(JSON.stringify(user)).toString('base64')
-
-  return next()
+  req.user = user
+  next()
 }
