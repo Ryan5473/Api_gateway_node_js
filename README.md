@@ -41,8 +41,6 @@ This **API Gateway** is designed to be **scalable** on-demand:
 
 ## <span style="color: #2d87f0;">Installation</span>
 
-### <span style="color: #e64a19;">Prerequisites</span>
-- **Node.js** (v14 or higher)
-- **npm** or **yarn**
+
 
 ### <span style="color: #e64a19;">Steps:</span>
